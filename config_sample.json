@@ -1,0 +1,10 @@
+{
+    "Cloudflare-Config":{
+        "API_TOKEN":"API_TOKEN that was generated from your cloudflare account",
+        "RECORD_TYPE":"A",
+        "ZONE_ID":"",
+        "SITE":"example.com",
+        "TTL":"0",
+        "PROXIED":"false"
+    }
+}
