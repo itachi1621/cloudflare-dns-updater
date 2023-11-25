@@ -1,10 +1,16 @@
 {
+    "Application-Config":{
+        "MODE":"Service or Cron",
+        "SERVICE-INTERVAL":360,
+        "Comment":"Service or Cron, Service will run the script as a service and will check every 360 seconds, Cron will run the script once and exit",
+        "Comment2":"Depending on how you run the script you will need to set the correct base path in the code"
+    },
     "Cloudflare-Config":{
-        "API_TOKEN":"API_TOKEN that was generated from your cloudflare account",
+        "API_TOKEN":"API_TOKEN that was generated from your cloudflare account https://dash.cloudflare.com/profile/api-tokens I recommend using the Edit zone DNS template",
         "RECORD_TYPE":"A",
-        "ZONE_ID":"",
+        "ZONE_ID":"You can get this from your cloudflare account under the overview tab under your domain name",
         "SITE":"example.com",
-        "TTL":"0",
-        "PROXIED":"false"
+        "TTL":"1",
+        "PROXIED":false
     }
 }

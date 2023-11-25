@@ -3,3 +3,4 @@ my_env
 utils/__pycache__
 last*.txt
 config.json
+*.log

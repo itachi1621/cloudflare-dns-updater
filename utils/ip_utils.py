@@ -16,7 +16,7 @@ def getCurrentIP():
             print("Error getting current IP: " + str(r.status_code))
             return False
 
-        return r.json()['ip']
+        return str(r.json()['ip'])
     except Exception as e:
         print("Error getting current IP: " + str(e))
         return False

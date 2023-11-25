@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 def getDNSIdentifier(Cloudflare_Token:str="",zone_id:str="",site_name:str=""):
@@ -19,15 +20,15 @@ def getDNSIdentifier(Cloudflare_Token:str="",zone_id:str="",site_name:str=""):
         print("Error getting DNS identifier: " + str(e))
         return False
 
-def setNewDNSIP(Cloudflare_Token:str="",zone_id:str="",site_identifier:str="",sitename:str="",dns_record_data:dict={}):
+def setNewDNSIP(Cloudflare_Token:str="",zone_id:str="",site_identifier:str="",dns_record_data:dict={}):
     try:
         headers = {'Authorization': 'Bearer ' + Cloudflare_Token}
-        data = dns_record_data
+        data = json.dumps(dns_record_data)
         r = requests.put('https://api.cloudflare.com/client/v4/zones/'+zone_id+'/dns_records/'+site_identifier, headers=headers,data=data)
         if r.status_code != 200:
             print("Error setting new DNS IP: " + str(r.status_code))
             #message body
-            #print(r.json())
+            print(r.json())
             return False
         return True
     except Exception as e:
