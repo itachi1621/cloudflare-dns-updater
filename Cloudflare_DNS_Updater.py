@@ -49,7 +49,7 @@ def getLastIP(last_ip_file:str="last_ip.txt"):
 def updateDNSRecord(ip:str=""):
     try:
         #load the config for clood flare
-        with open('config.json') as f:
+        with open(config_file) as f:
             config = json.load(f)
         cloudflare_config = config['Cloudflare-Config']
 
@@ -70,8 +70,7 @@ def updateDNSRecord(ip:str=""):
             logging.error("DNS Update Failed")
         updateLastKnownIP(last_ip_file,current_ip)
     except Exception as e:
-        print(e)
-        print("Error Updating DNS")
+        logging.error("Error Updating DNS: " + str(e))
 
 
 
@@ -89,7 +88,7 @@ if app_mode == "Service":
             last_ip = current_ip
         time.sleep(service_interval)
 elif app_mode == "Cron":
-    if current_ip != last_ip:
+    if str(current_ip) != str(last_ip):
         updateDNSRecord(current_ip)
 else:
     logging.error("Invalid Mode")
