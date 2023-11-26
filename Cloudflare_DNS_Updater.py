@@ -13,7 +13,7 @@ config_file = basePath+"config.json" #Full path again beat that dead horse
 current_ip = ""
 last_ip = ""
 logfile = basePath+"ipchange.log" #Again this needs to be the full path if running as a service or cron job
-logging.basicConfig(filename='ipchange.log',level=logging.DEBUG,format='%(levelname)-8s %(asctime)s %(message)s', datefmt='%Y/%m/%d %I:%M:%S %p')
+logging.basicConfig(filename=logfile,level=logging.DEBUG,format='%(levelname)-8s %(asctime)s %(message)s', datefmt='%Y/%m/%d %I:%M:%S %p')
 
 with open(config_file) as f:
     config = json.load(f)
