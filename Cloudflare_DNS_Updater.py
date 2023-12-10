@@ -51,24 +51,26 @@ def updateDNSRecord(ip:str=""):
         #load the config for clood flare
         with open(config_file) as f:
             config = json.load(f)
-        cloudflare_config = config['Cloudflare-Config']
 
-        dns_site_identifier = getDNSIdentifier(cloudflare_config['API_TOKEN'],cloudflare_config['ZONE_ID'],cloudflare_config['SITE'])
-        print("IP has changed, updating DNS")
-        record_data = {
-                        "type":cloudflare_config['RECORD_TYPE'], #A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF
-                        "name":cloudflare_config['SITE'],
-                        "content":ip,
-                        "ttl":cloudflare_config['TTL'],#Time to live 1 = auto
-                        "proxied":cloudflare_config['PROXIED']#Proxy through cloudflare
-                        }
+        for location in range(len(config['Cloudflare-Config'])):
+            cloudflare_config = config['Cloudflare-Config'][location]
 
-        if setNewDNSIP(cloudflare_config['API_TOKEN'],cloudflare_config['ZONE_ID'],dns_site_identifier,record_data):
-            logging.info("DNS Updated")
-            updateLastKnownIP(last_ip_file,ip)
-        else:
-            logging.error("DNS Update Failed")
-        updateLastKnownIP(last_ip_file,current_ip)
+            dns_site_identifier = getDNSIdentifier(cloudflare_config['API_TOKEN'],cloudflare_config['ZONE_ID'],cloudflare_config['SITE'])
+            print("IP has changed, updating DNS : " + cloudflare_config['SITE'])
+            record_data = {
+                            "type":cloudflare_config['RECORD_TYPE'], #A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF
+                            "name":cloudflare_config['SITE'],
+                            "content":ip,
+                            "ttl":cloudflare_config['TTL'],#Time to live 1 = auto
+                            "proxied":cloudflare_config['PROXIED']#Proxy through cloudflare
+                            }
+
+            if setNewDNSIP(cloudflare_config['API_TOKEN'],cloudflare_config['ZONE_ID'],dns_site_identifier,record_data):
+                logging.info("DNS Updated: " + cloudflare_config['SITE'] + " : " + ip)
+                updateLastKnownIP(last_ip_file,ip)
+            else:
+                logging.error("DNS Update Failed")
+            updateLastKnownIP(last_ip_file,current_ip)
     except Exception as e:
         logging.error("Error Updating DNS: " + str(e))
 
