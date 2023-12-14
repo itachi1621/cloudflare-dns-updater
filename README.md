@@ -21,7 +21,7 @@ Before running the script, you need to configure it by providing the necessary i
 ```json
 {
   "Application-Config": {
-    "MODE": "Service",  # Options: "Service" or "Cron"
+    "MODE": "Cron",  # Options: "Service" or "Cron"
     "SERVICE-INTERVAL": 300  # Interval in seconds for checking IP changes (applicable in service mode)
   },
   "Cloudflare-Config": [
@@ -62,10 +62,7 @@ python cloudflare_dns_updater.py
 - Click on "Create Token" and choose the "Edit zone DNS" template.
 - Assign the token a name, and make sure it has the necessary permissions.
 - Copy the generated API token.
--  Link
-   ```
-   https://dash.cloudflare.com/profile/api-tokens
-    ```
+-  [Cloudflare API Tokens Link](https://dash.cloudflare.com/profile/api-tokens)
 
 **2.) Zone ID:**
 
