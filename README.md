@@ -79,3 +79,7 @@ This script currently supports only IPV4 addresses. If you have IPV6, you'll nee
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Acknowledgments
+- Special thanks to [Cloudflare](https://www.cloudflare.com) for their awesome DNS services.
+- [ipify.org](https://www.ipify.org) for providing a free service that fetches public ip addresses .
+
